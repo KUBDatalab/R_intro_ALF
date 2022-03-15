@@ -69,7 +69,7 @@ fields. Separated by a `|` pipe character. Character.
 Separated by a `|` pipe character. Character.
 * `ISN` : ISBN or ISSN. Exported from MARC field 020|a. Character
 * `CALL...ITEM` : Item call number. Most of these are `NA` but there are some
-secondary call numbers.
+secondary call numbers. Character
 * `X008.Date.One` : Date of publication. Date. YYYY
 * `BCODE2` : Item format. Character.
 * `BCODE1` Sub-collection. Character.
@@ -84,8 +84,6 @@ In order to use your data in R, you must import it and turn it into an R *object
   + Text: TXT (`readLines()` function)
   + Tabular data: CSV, TSV (`read.table()` function or `readr` package)
   + Excel: XLSX (`xlsx` package)
-  + Google sheets: (`googlesheets` package)
-  + Statistics program: SPSS, SAS (`haven` package)
   + Databases: MySQL (`RMySQL` package)
 * **Gather it from the web**: You can connect to webpages, servers, or APIs
 directly from within R, or you can create a data scraped from HTML webpages
@@ -105,7 +103,7 @@ can be especially helpful when you have multiple projects. In general, you might
 create directories (folders) for **scripts**, **data**, and **documents**. Here
 are some examples of suggested directories:
 
- - **`data/`** Use this folder to store your raw data and intermediate datasets.
+ - **`data/`** Use this folder to store your raw data.
  For the sake of transparency and
  [provenance](https://en.wikipedia.org/wiki/Provenance), you should *always*
  keep a copy of your raw data accessible and do as much of your data cleanup and
@@ -145,28 +143,6 @@ Directory". Alternatively, you can use `setwd("/path/to/working/directory")` to
 reset your working directory. However, your scripts should not include this line,
 because it will fail on someone else's computer.
 
-> ## Setting your working directory with `setwd()`
->
-> Some points to note about setting your working directory:
-> 
-> The directory must be in quotation marks. 
->
-> On Windows computers, directories in file paths are separated with a
-backslash `\`. However, in R, you must use a forward slash `/`. You can copy and
-paste from the Windows Explorer window directly into R and use find/replace
-(Ctrl/Cmd + F) in R Studio to replace all backslashes with forward slashes.
->
-> On Mac computers, open the Finder and navigate to the directory you wish to
-set as your working directory. Right click on that folder and press the
-<kbd>options</kbd> key on your keyboard. The 'Copy "Folder Name"' option will transform into
-'Copy "Folder Name" as Pathname. It will copy the path to the folder to the
-clipboard. You can then paste this into your `setwd()` function. You do not need
-to replace backslashes with forward slashes.
->
-> After you set your working directory, you can use `./` to represent it. So if
-you have a folder in your directory called `data`, you can use
-read.csv("./data") to represent that sub-directory.
-{: .callout}
 
 
 ### Downloading the data and getting set up
@@ -233,7 +209,7 @@ module.
 > ## Note
 >
 > `read_csv()` assumes that fields are delineated by commas, however, in several
-> countries, the comma is used as a decimal separator and the semicolon (;) is
+> countries (for instance Denmark), the comma is used as a decimal separator and the semicolon (;) is
 > used as a field delineator. If you want to read in this type of files in R,
 > you can use the `read_csv2` function. It behaves exactly like `read_csv` but
 > uses different parameters for the decimal and the field separators. If you are
@@ -284,23 +260,21 @@ When calling a `tbl_df` object (like `books` here), there is already a lot of in
 functions. Let's try them out!
 
 * Size:
-  * `dim(books)` - returns a vector with the number of rows in the first element,
-and the number of columns as the second element (the **dim**ensions of
-the object)
   * `nrow(books)` - returns the number of rows
   * `ncol(books)` - returns the number of columns
+  * `dim(books)` - returns a vector with the **dim**ensions of the object. The number of rows in the first element,
+and the number of columns as the second element 
 
 * Content:
   * `head(books)` - shows the first 6 rows
   * `tail(books)` - shows the last 6 rows
 
 * Names:
-  * `names(books)` - returns the column names (synonym of `colnames()` for
-`data.frame` objects)
+  * `names(books)` - returns the column names
 
 * Summary:
   * `View(books)` - look at the data in the viewer
-  * `str(books)` - structure of the object and information about the class,
+  * `str(books)` - **str**ucture of the object and information about the class,
 length and content of each column
   * `summary(books)` - summary statistics for each column
 
@@ -422,32 +396,3 @@ have seen, the majority of items have 0 checkouts.
 > {: .solution}
 {: .challenge}
 
-## Logical tests 
-
-R contains a number of operators you can use to compare
-values. Use `help(Comparison)` to read the R help file. Note that **two equal
-signs** (`==`) are used for evaluating equality (because one equals sign (`=`)
-is used for assigning variables).
-
-| operator | function |
-| ----------- | ----------- |
-| `<` | Less Than |
-| `>` | Greater Than |
-| `==` | Equal To |
-| `<=` | Less Than or Equal To |
-| `>=` | Greater Than or Equal To |
-| `!=` | Not Equal To |
-| `%in%` | Has a Match In |
-| `is.na()` | Is NA |
-| `!is.na()` | Is Not NA |
-
-Sometimes you need to do multiple logical tests (think Boolean logic). Use
-`help(Logic)` to read the help file.
-
-| operator | function |
-| ----------- | ----------- |
-| `&` | boolean AND |
-| `|` | boolean OR |
-| `!` | Boolean NOT |
-| `any()` | Are some values true? |
-| `all()` | Are all values true? |
