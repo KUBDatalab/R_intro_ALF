@@ -173,7 +173,19 @@ download.file("https://ndownloader.figshare.com/files/22031487",
 {: .language-r}
 
 Now if you navigate to your `data` folder, the `books.csv` file should be there.
+
+We need to download an additional file:
+
+
+~~~
+download.file("https://github.com/KUBDatalab/R_intro_ALF/blob/main/data/call_class.csv",
+              "data/call_class.csv", mode = "wb")
+~~~
+{: .language-r}
+
 We now need to load it into our R session.
+
+
 
 ## `tidyverse`
 R has some base functions for reading a local data file into your R

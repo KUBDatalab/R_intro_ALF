@@ -801,13 +801,15 @@ Here is a more complex example:
 
 
 ~~~
-books %>% 
+counts <- books %>% 
   filter(format == "book") %>%
   mutate(call_class = str_sub(callnumber, 1, 1)) %>%
   group_by(call_class) %>%
   summarize(count = n(),
             sum_tot_chkout = sum(tot_chkout)) %>%
   arrange(desc(sum_tot_chkout))
+
+counts
 ~~~
 {: .language-r}
 
@@ -845,6 +847,89 @@ order, so we can see the class with the most total checkouts. We can see
 it is the `E` class (History of America), followed by `NA` (items with
 no call number data), followed by `H` (Social Sciences) and `P`
 (Language and Literature).
+
+## Bringing in additional data
+
+Those call classes. What do they mean? We might be librarians, but we are 
+probably not able to remember them.
+
+We have a csv-file in our data folder, that we downloaded earlier.
+
+Let us read that in:
+
+
+~~~
+call_classes <- read_csv("data/call_class.csv")  # load the data and assign it to books
+~~~
+{: .language-r}
+
+If we take a look at the data we read in:
+
+
+~~~
+head(call_classes)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in head(call_classes): object 'call_classes' not found
+~~~
+{: .error}
+
+We see that we have (some of) the same "call_class" codes here, that we do in
+the summarised data. We also have the codes in clear text where we can see
+what they actually mean.
+
+It would be useful if we were able to join those two data frames into one.
+
+That can be done in several ways. Let us jump directly into it:
+
+
+~~~
+counts %>% left_join(call_classes)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in is.data.frame(y): object 'call_classes' not found
+~~~
+{: .error}
+What happened?
+
+The "left_join()" function took the data frame on the left, and returned
+all rows, and all columns in it.
+
+In addition, it looked up the call_class column in the data frame on the 
+right, "call_class", and joined the information with the left data frame.
+
+It did it by the "call_class" column, and was able to figure out that it 
+was this column that should be used, because the two data frames have only
+one column in common. And because those columns have the same name.
+
+If they did not have the same name, or if they have more than one column in
+common, we would have to specify which columns should form the basis of the 
+join.
+
+We do that by adding an argument to the function:
+
+
+~~~
+counts %>% left_join(call_classes, by = c("call_class" = "call_class"))
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in is.data.frame(y): object 'call_classes' not found
+~~~
+{: .error}
+
+There are other join functions but left-join is the most used.
 
 ## Reshaping data with pivot_wider() and pivot_longer()
 
