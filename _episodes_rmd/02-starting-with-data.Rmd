@@ -178,7 +178,7 @@ Now if you navigate to your `data` folder, the `books.csv` file should be there.
 
 We need to download an additional file:
 
-```{r download-data, eval=FALSE}
+```{r download-class-data, eval=FALSE}
 download.file("https://github.com/KUBDatalab/R_intro_ALF/blob/main/data/call_class.csv",
               "data/call_class.csv", mode = "wb")
 ```
