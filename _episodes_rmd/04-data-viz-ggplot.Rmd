@@ -729,5 +729,24 @@ ggsave("fig_output/yearly_counts_plot.png", yearly_counts_plot, width = 15, heig
 >   [http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/)).
 {: .challenge}
 
+## Bonus - indlæs json data
+
+NB: Det her er hurtigt improviseret, så det er ikke givet filen ligger
+der. Det kan være det bliver rettet til onsdag.
+
+```{r}
+library(rjson)
+result <- fromJSON(file = "../data/input.json")
+result
+```
+
+Ikke super anvendeligt. Resultatet kan konverteres til en dataframe:
+
+```{r}
+json_data_frame <- as.data.frame(result)
+json_data_frame
+```
+
+Der er MANGE faldgruber i det her - I ved hvor vi sidder, så kom bare forbi.
 
 {% include links.md %}
