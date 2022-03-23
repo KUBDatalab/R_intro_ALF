@@ -1010,8 +1010,30 @@ der. Det kan være det bliver rettet til onsdag.
 
 
 ~~~
+# install.packages("rjson")
 library(rjson)
-result <- fromJSON(file = "../data/input.json")
+result <- fromJSON(file = "data/input.json")
+~~~
+{: .language-r}
+
+
+
+~~~
+Warning in file(con, "r"): cannot open file 'data/input.json': No such file or
+directory
+~~~
+{: .warning}
+
+
+
+~~~
+Error in file(con, "r"): cannot open the connection
+~~~
+{: .error}
+
+
+
+~~~
 result
 ~~~
 {: .language-r}
@@ -1019,31 +1041,28 @@ result
 
 
 ~~~
-$ID
-[1] "1" "2" "3" "4" "5" "6" "7" "8"
-
-$Name
-[1] "Rick"     "Dan"      "Michelle" "Ryan"     "Gary"     "Nina"     "Simon"   
-[8] "Guru"    
-
-$Salary
-[1] "623.3"  "515.2"  "611"    "729"    "843.25" "578"    "632.8"  "722.5" 
-
-$StartDate
-[1] "1/1/2012"   "9/23/2013"  "11/15/2014" "5/11/2014"  "3/27/2015" 
-[6] "5/21/2013"  "7/30/2013"  "6/17/2014" 
-
-$Dept
-[1] "IT"         "Operations" "IT"         "HR"         "Finance"   
-[6] "IT"         "Operations" "Finance"   
+Error in eval(expr, envir, enclos): object 'result' not found
 ~~~
-{: .output}
+{: .error}
 
 Ikke super anvendeligt. Resultatet kan konverteres til en dataframe:
 
 
 ~~~
 json_data_frame <- as.data.frame(result)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in as.data.frame(result): object 'result' not found
+~~~
+{: .error}
+
+
+
+~~~
 json_data_frame
 ~~~
 {: .language-r}
@@ -1051,17 +1070,9 @@ json_data_frame
 
 
 ~~~
-  ID     Name Salary  StartDate       Dept
-1  1     Rick  623.3   1/1/2012         IT
-2  2      Dan  515.2  9/23/2013 Operations
-3  3 Michelle    611 11/15/2014         IT
-4  4     Ryan    729  5/11/2014         HR
-5  5     Gary 843.25  3/27/2015    Finance
-6  6     Nina    578  5/21/2013         IT
-7  7    Simon  632.8  7/30/2013 Operations
-8  8     Guru  722.5  6/17/2014    Finance
+Error in eval(expr, envir, enclos): object 'json_data_frame' not found
 ~~~
-{: .output}
+{: .error}
 
 Der er MANGE faldgruber i det her - I ved hvor vi sidder, så kom bare forbi.
 

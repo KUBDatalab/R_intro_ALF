@@ -735,8 +735,9 @@ NB: Det her er hurtigt improviseret, så det er ikke givet filen ligger
 der. Det kan være det bliver rettet til onsdag.
 
 ```{r}
+# install.packages("rjson")
 library(rjson)
-result <- fromJSON(file = "../data/input.json")
+result <- fromJSON(file = "data/input.json")
 result
 ```
 
